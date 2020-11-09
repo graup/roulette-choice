@@ -1,4 +1,4 @@
-# r2
+# Roulette Choice
 
 ## Project setup
 ```
