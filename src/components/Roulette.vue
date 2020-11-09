@@ -31,8 +31,8 @@
 
     <!-- arrow -->
     <g transform="translate(19.65 0.5)" fill="#fff">
-      <rect x="0" y="0" width="0.5" height="2.25" />
-      <g transform="translate(0 2.25)" fill="#fff">
+      <rect x="0" y="0" width="0.5" height="2" />
+      <g transform="translate(0 2)" fill="#fff">
         <polygon points="0,0 0.5,0 0.25,0.5" />
       </g>
     </g>
@@ -109,7 +109,7 @@ export default class Roulette extends Vue {
     }
     this.timeout = setTimeout(() => {
       this.winnerIndex = winnerIndex;
-    }, 9500);
+    }, 9600);
   }
 }
 </script>
