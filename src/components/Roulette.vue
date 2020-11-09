@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { Prop, Component, Vue, Watch } from 'vue-property-decorator'
+import { Prop, Component, Vue, Watch } from 'vue-property-decorator';
 import { normalize, cummulativeSum } from '../utils/stats';
 
 const colors = [
@@ -61,6 +61,10 @@ export default class Roulette extends Vue {
 
   get normalizedSlices() {
     return normalize(this.slices);
+  }
+
+  get cummulativeSlices() {
+    return cummulativeSum(this.normalizedSlices);
   }
 
   @Watch('slices')
@@ -97,9 +101,8 @@ export default class Roulette extends Vue {
 
   spin() {
     this.winnerIndex = -1;
-    const cumSlices = cummulativeSum(this.normalizedSlices);
     const winner = Math.random();
-    const winnerIndex = cumSlices.findIndex(prob => winner < prob);
+    const winnerIndex = this.cummulativeSlices.findIndex(probability => winner < probability);
     this.rotate = Math.ceil(this.rotate / 360) * 360 +  (1-winner) * 360 + 360 * 10;
     if (this.timeout) {
       clearTimeout(this.timeout);
