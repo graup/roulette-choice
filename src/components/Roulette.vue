@@ -103,6 +103,7 @@ export default class Roulette extends Vue {
     this.winnerIndex = -1;
     const winner = Math.random();
     const winnerIndex = this.cummulativeSlices.findIndex(probability => winner < probability);
+    console.log({ slices: this.cummulativeSlices, winner, winnerIndex, name: this.totalLabels[winnerIndex] });
     this.rotate = Math.ceil(this.rotate / 360) * 360 +  (1-winner) * 360 + 360 * 10;
     if (this.timeout) {
       clearTimeout(this.timeout);
