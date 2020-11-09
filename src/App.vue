@@ -11,7 +11,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component';
+import { LocalStorage } from './utils/LocalStorageMixin';
 import Roulette from './components/Roulette.vue';
 
 @Component({
@@ -19,9 +20,11 @@ import Roulette from './components/Roulette.vue';
     Roulette,
   },
 })
-export default class App extends Vue {
+export default class App extends mixins(LocalStorage) {
+  storeKeys = ['slicesInput', 'labelsInput'];
   slicesInput = '0.25 0.25 0.25 0.25';
   labelsInput = '';
+
   get slices() {
     return this.slicesInput.split(' ').map(parseFloat);
   }
