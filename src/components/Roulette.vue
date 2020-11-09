@@ -19,7 +19,7 @@
       <circle cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#000000" stroke-opacity="0.1" stroke-width="3.5"></circle>
 
       <!-- labels -->
-      <path id="circle-path" fill="transparent" d="M4.084505690811,20A15.915494309189,15.915494309189 0 1 135.915494309189,20A15.915494309189,15.915494309189 0 1 14.084505690811,20" />
+      <path id="circle-path" fill="transparent" d="M4.084505690811,20A15.915494309189,15.915494309189 0 1 135.915494309189,20A15.915494309189,15.915494309189 0 1 14.084505690811,20 M4.084505690811,20A15.915494309189,15.915494309189 0 1 135.915494309189,20A15.915494309189,15.915494309189 0 1 14.084505690811,20" />
       <g v-for="slice in sliceAttributes" :key="`text${slice.index}`">
         <text :dx="slice.labelOffset * (2 * Math.PI * 15.915494309189) - 0.3" dy="0.1" class="label" text-anchor="middle" dominant-baseline="central">
           <textPath xlink:href="#circle-path">
@@ -30,7 +30,7 @@
     </g>
 
     <!-- arrow -->
-    <g transform="translate(19.65 0.5)" fill="#fff">
+    <g transform="translate(19.75 0.5)" fill="#fff">
       <rect x="0" y="0" width="0.5" height="2" />
       <g transform="translate(0 2)" fill="#fff">
         <polygon points="0,0 0.5,0 0.25,0.5" />
@@ -120,7 +120,7 @@ svg {
 
 }
 .wheel {
-  transform-origin: 50% 50.2%;
+  transform-origin: 50% 50%;
   transition: transform 10s cubic-bezier(0.3, 1, 0.7, 1);
   will-change: transform;
   border-radius: 100%;
