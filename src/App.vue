@@ -7,6 +7,7 @@
       <input v-model="slicesInput" placeholder="Enter weights (space-separated)">
       <input v-model="labelsInput" placeholder="Enter names (optional, space-separated)">
     </div>
+    <footer>Made by <a href="https://twitter.com/graycoding">@graycoding</a></footer>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ export default class App extends mixins(LocalStorage) {
   }
   get labels() {
     if (this.labelsInput === '') return [];
-    return this.labelsInput.split(' ');
+    return this.labelsInput.trim().split(' ');
   }
 }
 </script>
@@ -50,8 +51,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  
+  color: #fff;
 }
 .app {
   height: 100vh;
@@ -79,5 +79,16 @@ body {
 }
 .input-wrap input:focus {
   outline: 1px solid #555;
+}
+footer {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  opacity: 0.7;
+}
+a, a:visited {
+  color: inherit;
 }
 </style>
