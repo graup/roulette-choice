@@ -26,7 +26,7 @@ export default class App extends mixins(LocalStorage) {
   labelsInput = '';
 
   get slices() {
-    return this.slicesInput.split(' ').map(parseFloat);
+    return this.slicesInput.trim().split(' ').map(parseFloat);
   }
   get labels() {
     if (this.labelsInput === '') return [];

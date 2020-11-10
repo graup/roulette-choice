@@ -86,12 +86,14 @@ export default class Roulette extends Vue {
     let dashOffset = 0;
     let index = 0;
     for (const slice of this.normalizedSlices) {
+      const isSameColorAsFirst = this.slices.length % colors.length === 1 && index === this.slices.length - 1;
+      const color = isSameColorAsFirst ? colors[1] : colors[index % colors.length];
       sliceAttributes.push({
         index,
         slice,
         dashOffset: 1 - dashOffset,
         labelOffset: (0.5 + dashOffset + slice/2) % 1,
-        color: colors[index % colors.length],
+        color,
       });
       dashOffset += slice;
       index += 1;
