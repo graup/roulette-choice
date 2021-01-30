@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
 
-@Component
+@Options({})
 export class LocalStorage extends Vue {
   storeKeys: string[] = [];
 

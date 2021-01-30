@@ -1,7 +1,7 @@
 <template>
   <svg width="100%" height="100%" viewBox="0 0 40 40" @click="spin" >
     <g class="wheel" :style="`transform: rotate(${offset/100*360+rotate}deg)`">
-      <image href="@/components/wheel.png" height="15" width="15" x="12.5" y="12.5" class="wheel-image" />
+      <image href="/@/components/wheel.png" height="15" width="15" x="12.5" y="12.5" class="wheel-image" />
       <!-- segments -->
       <g v-for="slice in sliceAttributes" :key="`arc${slice.index}`">
         <circle 
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { Prop, Component, Vue, Watch } from 'vue-property-decorator';
+import { prop, Vue } from 'vue-class-component';
 import { normalize, cummulativeSum } from '../utils/stats';
 
 const colors = [
@@ -50,14 +50,16 @@ const colors = [
   "#FDA400",
 ];
 
-@Component
-export default class Roulette extends Vue {
-  @Prop() slices!: number[];
-  @Prop({ default: -25 }) offset!: number;
-  @Prop({ default: []}) labels!: string[];
-  rotate = 0;
-  winnerIndex = -1;
-  timeout: null | number = null;
+class Props {
+  public slices = prop<number[]>({ default: [] });
+  public offset = prop({ default: -25 });
+  public labels = prop<string[]>({ default: [] });
+}
+
+export default class Roulette extends Vue.with(Props) {
+  public rotate = 0;
+  public winnerIndex = -1;
+  private timeout: null | number = null;
 
   get normalizedSlices() {
     return normalize(this.slices);
@@ -67,9 +69,10 @@ export default class Roulette extends Vue {
     return cummulativeSum(this.normalizedSlices);
   }
 
-  @Watch('slices')
-  slicesChanged() {
-    this.winnerIndex = -1;
+  public created(): void {
+    this.$watch('slices', () => {
+      this.winnerIndex = -1;
+    });
   }
 
   get totalLabels() {
@@ -106,7 +109,7 @@ export default class Roulette extends Vue {
     const winner = Math.random();
     const winnerIndex = this.cummulativeSlices.findIndex(probability => winner < probability);
     console.log({ slices: this.cummulativeSlices, winner, winnerIndex, name: this.totalLabels[winnerIndex] });
-    this.rotate = Math.ceil(this.rotate / 360) * 360 +  (1-winner) * 360 + 360 * 10;
+    this.rotate = Math.ceil(this.rotate / 360) * 360 + (1-winner) * 360 + 360 * 10;
     if (this.timeout) {
       clearTimeout(this.timeout);
     }

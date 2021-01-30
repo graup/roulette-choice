@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import Component, { mixins } from 'vue-class-component';
+import { Options, mixins } from 'vue-class-component';
 import { LocalStorage } from './utils/LocalStorageMixin';
 import Roulette from './components/Roulette.vue';
 
-@Component({
+@Options({
   components: {
     Roulette,
   },
